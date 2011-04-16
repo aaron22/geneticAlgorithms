@@ -41,7 +41,7 @@ class Chromosome(object):
         return sum(self.data)
 
 def main():
-    #print("don't run this file by itself!")
+    print("don't run this file by itself!")
 
 if __name__ == '__main__':
     main()
