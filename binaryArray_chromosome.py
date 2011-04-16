@@ -13,7 +13,7 @@ import random
 
 class Chromosome(object):
     '''represents a solution for a maximum-sum binary array problem'''
-    mutationRate = .1
+    mutation_rate = .1
 
     def __init__(self, size=128):
         '''loads the chromosome with random data of the specified size'''
@@ -50,7 +50,7 @@ class Chromosome(object):
         randomly selected bit in the chromosome; return value indicates whether
         a mutation occurred.
         '''
-        if random.random() < Chromosome.mutationRate:
+        if random.random() < Chromosome.mutation_rate:
             bitToFlip = random.randrange(self.size)
             self.data[bitToFlip] = 0 if self.data[bitToFlip] == 1 else 1
             return True
