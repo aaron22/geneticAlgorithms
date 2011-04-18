@@ -14,7 +14,7 @@ import random
 class Chromosome(object):
     '''represents a potential solution for a traveling-salesman problem'''
 
-    mutation_rate = .1
+    mutation_rate = .15
 
     '''the distances are represented by a dictionary; each key is a tuple in the
     form (source, destination), and the key is the distance between them'''

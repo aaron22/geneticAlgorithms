@@ -14,7 +14,7 @@ from binaryArray_chromosome import *
 
 def main():
     # set default values
-    max_generations = 100
+    max_generations = 120
     chromosome_size = 128
     population_size = 150
     # override defaults with command-line input (if it exists)

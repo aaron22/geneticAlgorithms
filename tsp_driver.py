@@ -43,9 +43,9 @@ def get_positions(cities, circle=True):
 
 def main():
     # set default values
-    max_generations = 150
-    cities = 45
-    population_size = 150
+    max_generations = 100
+    cities = 25
+    population_size = 100
     arrange_in_circle = True
     # override defaults with command-line input (if it exists)
     for i in sys.argv:
@@ -106,9 +106,9 @@ def main():
     # run the solver the specified # of generations, outputting the
     #  the best solution after each run
     for i in range(max_generations):
-        # time.sleep(.15)
+        time.sleep(.15)
         # output our progress so far
-        # print("generation: {}\t best: {}".format(i, population[0][1]))
+        print("generation: {}\t best: {}".format(i, population[0][1]))
 
         # reproduce, which has mutation built in
         children = []
@@ -144,8 +144,11 @@ def main():
         cir.setFill("blue")
         cir.setOutline("blue")
 
-    win.getMouse()
-    win.close()
+    while win.isOpen():
+        try:
+            win.getMouse()
+        except:
+            pass
 
 if __name__ == '__main__':
     main()
