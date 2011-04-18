@@ -13,6 +13,7 @@
 import sys
 import math
 import random
+import time
 from graphics import *
 from tsp_chromosome import *
 
@@ -25,7 +26,7 @@ def select_parents(population):
 def main():
     # set default values
     max_generations = 160
-    cities = 45
+    cities = 25
     population_size = 150
     # override defaults with command-line input (if it exists)
     for i in sys.argv:
@@ -59,16 +60,14 @@ def main():
     for i, src in enumerate(positions):
         for j, dst in enumerate(positions):
             Chromosome.distances[(i, j)] = None if i == j else math.sqrt((src.x - dst.x)**2 + (src.y - dst.y)**2)
-            #print(Chromosome.distances[(i, j)])
 
-    # draw the window
-##    win = GraphWin("TSP", 500, 500)
-##    for pos in positions:
-##        cir = Circle(pos, 5)
-##        cir.setFill("red")
-##        cir.setOutline("red")
-##        cir.draw(win)
-##    win.flush()
+    # draw the window and the city positions
+    win = GraphWin("TSP", 500, 500)
+    for pos in positions:
+        cir = Circle(pos, 5)
+        cir.setFill("red")
+        cir.setOutline("red")
+        cir.draw(win)
 
     # generate the initial population
     population = [Chromosome(cities) for i in range(population_size)]
@@ -78,9 +77,22 @@ def main():
     # sort by fitness
     population.sort(key=lambda item: item[1])
 
+    # draw our best initial solution
+    winner = population[0][0]
+    lines = []
+    # this loop will give us all edges, including the end back to the
+    #  beginning (which is why we have the weird loop target)
+    c1 = winner.data[0]
+    for c2 in winner.data[1:] + winner.data[:1]:
+        l = Line(positions[c1], positions[c2])
+        l.draw(win)
+        lines.append(l)
+        c1 = c2
+
     # run the solver the specified # of generations, outputting the
     #  the best solution after each run
     for i in range(max_generations):
+        time.sleep(.1)
         # output our progress so far
         print("generation: {}\t best: {}".format(i, population[0][1]))
 
@@ -97,26 +109,22 @@ def main():
         # only let the strong survive
         population = population[:population_size]
 
+        # erase the previous best path
+        for line in lines:
+            line.undraw()
+        lines = []
+        win.flush()
 
-##    win.getMouse()
-##    win.close()
-
-    # draw the window
-    win = GraphWin("TSP", 500, 500)
-    for pos in positions:
-        cir = Circle(pos, 5)
-        cir.setFill("red")
-        cir.setOutline("red")
-        cir.draw(win)
-
-    winner = population[0][0]
-    src = winner.data[0]
+        winner = population[0][0]
+        src = winner.data[0]
         # this loop will give us all edges, including the end back to the
         #  beginning (which is why we have the weird loop target)
-    for dst in winner.data[1:] + winner.data[:1]:
-        l = Line(positions[src], positions[dst])
-        l.draw(win)
-        src = dst
+        c1 = winner.data[0]
+        for c2 in winner.data[1:] + winner.data[:1]:
+            l = Line(positions[c1], positions[c2])
+            l.draw(win)
+            lines.append(l)
+            c1 = c2
 
     win.flush()
     win.getMouse()
