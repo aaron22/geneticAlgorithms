@@ -13,7 +13,12 @@ import random
 
 class Chromosome(object):
     '''represents a potential solution for a traveling-salesman problem'''
+
     mutation_rate = .1
+
+    '''the distances are represented by a dictionary; each key is a tuple in the
+    form (source, destination), and the key is the distance between them'''
+    distances = {} # = {(i, j):(1 if i != j else None) for i in range(25) for j in range(25)}
 
     def __init__(self, length=25, randomize=True):
         '''initializes an instance
@@ -47,7 +52,7 @@ class Chromosome(object):
         start, end = father.__get_random_endpoints__()
         # create two children, using both parents in each role
         return Chromosome.__reproduce__(father, mother, start, end), \
-            Chromosome.__reproduce__(mother, father, start, end), start, end
+            Chromosome.__reproduce__(mother, father, start, end)
 
     def __reproduce__(father, mother, start, end):
         '''Creates a single child from the specified parents
@@ -77,17 +82,20 @@ class Chromosome(object):
         self.data = self.data[:start] + self.data[start:end][::-1] + self.data[end:]
         return start, end
 
-import time
+    def get_fitness(self):
+        distance = 0
+        src = self.data[0]
+        # this loop will give us all edges, including the end back to the
+        #  beginning (which is why we have the weird loop target)
+        for dst in self.data[1:] + self.data[:1]:
+            distance += Chromosome.distances[(src, dst)]
+            src = dst
+        return distance
 
 def main():
-    Chromosome.mutation_rate = 0
-    f = Chromosome(10, False)
-    m = Chromosome(10, False)
-    m.data.reverse()
-    c1, c2, s, e = Chromosome.reproduce(f, m)
-    print('start: {}\tend: {}'.format(s, e))
-    print(c1.data)
-    print(c2.data)
+    c1 = Chromosome(4, False)
+    Chromosome.distances = {(0,0):None, (0,1):1, (0,2):2, (0,3):3, (1,0):4, (1,1):None, (1,2):5, (1,3):6, (2,0):7, (2,1):8, (2,2):None, (2,3):9, (3,0):10, (3,1):11, (3,2):12, (3,3):None}
+    print(c1.get_fitness())
 
 if __name__ == '__main__':
     main()
