@@ -9,6 +9,17 @@ ShowFileExtensions=FALSE
 [Project\ChildNodes\Node0]
 ClassName=TProjectFilesNode
 
+[Project\ChildNodes\Node0\ChildNodes\Node0]
+ClassName=TProjectFileNode
+FileName=D:\_development\gitProjects\geneticAlgorithms\tsp_chromosome.py
+
+[Project\ChildNodes\Node0\ChildNodes\Node1]
+ClassName=TProjectFileNode
+FileName=D:\_development\gitProjects\geneticAlgorithms\tsp_driver.py
+
+[Project\ChildNodes\Node0\ChildNodes]
+Count=2
+
 [Project\ChildNodes\Node1]
 ClassName=TProjectRunConfiguationsNode
 

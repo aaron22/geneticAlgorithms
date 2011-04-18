@@ -9,17 +9,16 @@
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
 
-import sys
+from graphics import *
 
 def main():
-    for i in sys.argv:
-        arg = i.split('=')
-        if arg[0] == 'gens':
-            print("gens -> ", int(arg[1]))
-        elif arg[0] == 'length':
-            print("length -> ", int(arg[1]))
-        elif arg[0] == 'popsize':
-            print("popsize -> ", int(arg[1]))
+    win = GraphWin("My Circle", 100, 100)
+    c = Line(Point(25,25), Point(75,75))
+    c.draw(win)
+    win.getMouse() # Pause to view result
+    c.undraw()
+    win.getMouse()
+    win.close()    # Close window when done
 
 if __name__ == '__main__':
     main()

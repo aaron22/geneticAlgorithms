@@ -11,10 +11,18 @@ ClassName=TProjectFilesNode
 
 [Project\ChildNodes\Node0\ChildNodes\Node0]
 ClassName=TProjectFileNode
-FileName=C:\Users\emily\git_projects\geneticAlgorithms\test.py
+FileName=D:\_development\gitProjects\geneticAlgorithms\binaryArray_chromosome.py
+
+[Project\ChildNodes\Node0\ChildNodes\Node1]
+ClassName=TProjectFileNode
+FileName=D:\_development\gitProjects\geneticAlgorithms\binaryArray_driver.py
+
+[Project\ChildNodes\Node0\ChildNodes\Node2]
+ClassName=TProjectFileNode
+FileName=D:\_development\gitProjects\geneticAlgorithms\test.py
 
 [Project\ChildNodes\Node0\ChildNodes]
-Count=1
+Count=3
 
 [Project\ChildNodes\Node1]
 ClassName=TProjectRunConfiguationsNode

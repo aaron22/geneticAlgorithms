@@ -16,7 +16,7 @@ def main():
     # set default values
     max_generations = 100
     chromosome_size = 128
-    population_size = 100
+    population_size = 150
     # override defaults with command-line input (if it exists)
     for i in sys.argv:
         arg = i.split('=')
